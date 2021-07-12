@@ -11,7 +11,7 @@ const ItemCardContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin: 20px;
+    margin: 10px;
     padding: 10px;
     box-shadow: 0 5px 10px rgba(154,160,185,1), 0 15px 40px rgba(166,173,201,0.5);
 `;
