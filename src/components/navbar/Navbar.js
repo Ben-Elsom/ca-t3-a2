@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './Navbar.css';
-import logo from '../imgs/logo.png';
+import logo from '../../imgs/logo.png';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {IoCloseSharp} from 'react-icons/io5';
 
