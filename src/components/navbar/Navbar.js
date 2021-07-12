@@ -8,7 +8,6 @@ export default function Navbar (props) {
     const [navbar, setNavbar] = useState(true)
 
     window.addEventListener('resize', () => (window.innerWidth <= 500) ? setNavbar(false) : setNavbar(true))
-    console.log(props)
     return(
         <nav>
             <div className='nav-container'>
