@@ -28,7 +28,7 @@ const items = [
   {
     id: 1004,
     name: 'Coke 750ml',
-    price: "2.5",
+    price: "2.50",
     thumbnail: ramenThumbnail,
     description: '',
     category: "Drink"
@@ -36,7 +36,7 @@ const items = [
   {
     id: 1005,
     name: 'Chicken Karage (6Pc)',
-    price: "8",
+    price: "8.00",
     thumbnail: ramenThumbnail,
     description: '',
     category: "Side"
@@ -44,7 +44,7 @@ const items = [
   {
     id: 1006,
     name: 'Onsen Egg',
-    price: "1.5",
+    price: "1.50",
     thumbnail: ramenThumbnail,
     description: '',
     category: "Topping"
