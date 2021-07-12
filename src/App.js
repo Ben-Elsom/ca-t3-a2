@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 // import OrderPage from './pages/OrderPage.js';
-import Navbar from './components/Navbar.js';
+import Navbar from './components/navbar/Navbar.js';
 import ramenThumbnail from './imgs/ramen_thumbnail.png';
 import ItemCard from './components/ItemCard.js';
 

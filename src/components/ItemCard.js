@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import Button from './Button';
+import Button from './buttons/Button';
 import styled from 'styled-components';
-import OverlayItem from './OverlayItem.js';
+import ItemModal from '../components/modals/ItemModal.js';
 
 const ItemCardContainer = styled.div`
     background-color: #fff;
@@ -40,18 +40,19 @@ const ItemPrice = styled.p`
 `;
 
 export default function ItemCard(props) {
-    const [overlay, setOverlay] = useState(false)
+    const [itemModal, setItemModal] = useState(false)
 
     return (
-        <ItemCardContainer onClick={() => console.log("outside")}>
-            {overlay && <OverlayItem
-                thumbnail={props.thumbnail}
+        <ItemCardContainer>
+            <ItemModal
+                isOpen={itemModal}
+                closeModal={() => setItemModal(false)}
                 name={props.name}
                 price={props.price}
+                thumbnail={props.thumbnail}
                 description={props.description}
-                closeOverlay={() => setOverlay(false)}
-            />}
-            <ItemThumbnailBtn onClick={() => setOverlay(true)}>
+            />
+            <ItemThumbnailBtn onClick={() => setItemModal(true)}>
                 <ItemThumbnail src={props.thumbnail} alt='item thumbnail'/>
             </ItemThumbnailBtn>
             <ItemName>{props.name}</ItemName>
@@ -60,6 +61,3 @@ export default function ItemCard(props) {
         </ItemCardContainer>
     )
 }
-
-
-// http://reactcommunity.org/react-modal/
