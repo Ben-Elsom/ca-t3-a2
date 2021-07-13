@@ -47,11 +47,11 @@ const CategoryTitle = styled.h1`
     text-align: center;
 `;
 
-const Hr = styled.hr`
-    width: 70vw;
-    height: 3px;
-    background: #000;
-`;
+// const Hr = styled.hr`
+//     width: 70vw;
+//     height: 3px;
+//     background: #000;
+// `;
 
 const CategoryContainer = styled.div`
     display: flex;
@@ -70,13 +70,16 @@ export default function ItemMenu(props) {
         setItems(props.items)
     }, [])
 
-    const renderCategories = categories.map((category) => (
-        <Category><a href={`#${category}`}>{category}</a></Category>
-    ))
+    const renderCategories = categories.map((category) => {
+        console.log(category.name)
+    return     (
+        <Category key={category.name}><a href={`#${category}`}>{category}</a></Category>
+    ) } )
+
     const renderItems = categories.map((category) => (
-        <div>
+        <div key={category.name}>
                 <CategoryTitle id={category}>{category}</CategoryTitle>
-                <Hr />
+                {/* <Hr /> */}
                 <CategoryContainer>
                     {
                         items.filter((item) => item.category === category)

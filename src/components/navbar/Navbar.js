@@ -22,8 +22,8 @@ export default function Navbar (props) {
                     <ul className={navbar ? 'nav-links' : 'nav-links hide-nav'}>
                         <li className='nav-link'>Hi, {props.user.firstName} !</li>
                         <li className='nav-link'>Membership Points : {props.user.membershipPoints}</li>
-                        <li className='nav-link'><a>Edit Profile</a></li>
-                        <li className='nav-link'><a>Logout</a></li>
+                        <li className='nav-link'><a href='/'>Edit Profile</a></li>
+                        <li className='nav-link'><a href='/'>Logout</a></li>
                     </ul>
                 </div>
             </div>
