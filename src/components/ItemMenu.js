@@ -41,6 +41,7 @@ const ShoppingCart = styled.button`
     font-size: 2.7rem;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 `;
 
 const CategoryTitle = styled.h1`
@@ -70,14 +71,12 @@ export default function ItemMenu(props) {
         setItems(props.items)
     }, [])
 
-    const renderCategories = categories.map((category) => {
-        console.log(category.name)
-    return     (
-        <Category key={category.name}><a href={`#${category}`}>{category}</a></Category>
-    ) } )
+    const renderCategories = categories.map((category) => (
+        <Category key={category}><a href={`#${category}`}>{category}</a></Category>
+    ))
 
     const renderItems = categories.map((category) => (
-        <div key={category.name}>
+        <div key={category}>
                 <CategoryTitle id={category}>{category}</CategoryTitle>
                 {/* <Hr /> */}
                 <CategoryContainer>

@@ -67,6 +67,11 @@ nav {
     text-align: center;
 }
 
+.nav-link a {
+    text-decoration: none;
+    color: #fff;
+}
+
 @media screen and (min-width: 500px){
     .menu-btn{
         display: none;
