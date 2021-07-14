@@ -1,7 +1,7 @@
 import React from 'react'
 import './OrderListModal.css';
 import Modal from 'react-modal';
-import SelectTime from './SelectTime.js';
+import PickupTime from './PickupTime.js';
 
 export default function OrderListModal(props) {
     return (
@@ -13,7 +13,7 @@ export default function OrderListModal(props) {
         >
             <button className='close-btn' onClick={props.closeModal}>x</button>
             <h1 className='orderList-header'>Confirm Order</h1>
-            <SelectTime />
+            <PickupTime />
             
         </Modal>
     )

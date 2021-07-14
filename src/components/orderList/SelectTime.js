@@ -1,49 +1,47 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {BiEditAlt} from 'react-icons/bi';
-import Flatpickr from 'react-flatpickr';
+import {MdDone} from 'react-icons/md';
+import { format, addMinutes, addDays} from 'date-fns';
 
-const Container = styled.div`
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    padding: 10px 8px;
-    position: relative;
+const Form = styled.form`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 `;
 
-const H4 = styled.h4`
-    margin: 5px 0 5px 20px;
+const Input = styled.input`
+    border: none;
+
+    &:invalid+span:after{
+        content: 'Invalid';
+        color: red;
+    }
 `;
 
-
-const P = styled.p`
-    margin: 0 0 0 20px;
-`;
-
-const Icon = styled.button`
-    font-size: 2rem;
+const Submit = styled.button`
     background: transparent;
     border: none;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    cursor: pointer;
+
 `;
 
-export default function SelectTime() {
-    const [dateTime, setDateTime] = useState(new Date());
+export default function SelectTime(props) {
     return (
-        <Container>
-            <H4>PICK UP TIME</H4>
-            <P>DATE: {dateTime.toDateString()}</P>
-            <P>TIME: {dateTime.toLocaleTimeString()}</P>
-            <Icon>
-                <BiEditAlt />
-            </Icon>
-
-            <Flatpickr
-                date-enable-dateTime
-                value={dateTime}
-                onChange={date => setDateTime(date)}
-            />
-        </Container>
+        <Form onSubmit={props.submit}>
+            {/* Date time selection, minimum is 15 min from now, maximum is 7 days from now */}
+            <Input
+                type='datetime-local'
+                min={format(addMinutes(new Date(), 15), "yyyy'-'MM'-'dd'T'HH':'mm")}
+                max={format(addDays(new Date(), 7), "yyyy'-'MM'-'dd'T21:00'")}
+                required
+                name="dateTime"
+                onChange={props.onChange}
+            /><span className='validate' />
+            <Submit type='submit'>
+                <MdDone />
+            </Submit>            
+        </Form>
     )
 }
