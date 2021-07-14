@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {BiEditAlt} from 'react-icons/bi';
+import Flatpickr from 'react-flatpickr';
 
 const Container = styled.div`
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
@@ -37,6 +38,12 @@ export default function SelectTime() {
             <Icon>
                 <BiEditAlt />
             </Icon>
+
+            <Flatpickr
+                date-enable-dateTime
+                value={dateTime}
+                onChange={date => setDateTime(date)}
+            />
         </Container>
     )
 }
