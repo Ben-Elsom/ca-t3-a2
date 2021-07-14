@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import Button from './buttons/Button';
+import Button from '../buttons/Button';
 import styled from 'styled-components';
-import ItemModal from '../components/modals/ItemModal.js';
+import ItemModal from './ItemModal.js';
 
 const ItemCardContainer = styled.div`
     background-color: #fff;

@@ -1,0 +1,26 @@
+.orderList-modal{
+    box-shadow: 0 5px 10px rgba(154,160,185,1), 0 15px 40px rgba(166,173,201,0.5);
+    width: 90vw;
+    max-width: 450px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+}
+
+.close-btn{
+    border: none;
+    background: transparent;
+    font-size: 3rem;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    cursor: pointer;
+}
+
+.orderList-header{
+    text-align: center;
+}

@@ -8,6 +8,7 @@ export default function ItemModal(props) {
             isOpen={props.isOpen}
             onRequestClose={props.closeModal}
             className='item-modal'
+            ariaHideApp={false}
         >
             <button className='close-btn' onClick={props.closeModal}>x</button>
             <img className='item-thumbnail' src={props.thumbnail} alt={props.name} />

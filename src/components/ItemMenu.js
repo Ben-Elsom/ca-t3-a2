@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import styled from 'styled-components';
-import ItemCard from './ItemCard.js';
-import {AiOutlineShoppingCart} from 'react-icons/ai';
+import ItemCard from './item/ItemCard.js';
+import ShoppingCart from './orderList/ShoppingCart.js';
 
 const Main = styled.div`
     margin-bottom: 50px;
@@ -37,13 +37,6 @@ const Category = styled.li`
     }
 `;
 
-const ShoppingCart = styled.button`
-    font-size: 2.7rem;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-`;
-
 const CategoryTitle = styled.h1`
     text-align: center;
 `;
@@ -65,11 +58,12 @@ const CategoryContainer = styled.div`
 `;
 
 export default function ItemMenu(props) {
-    const [items, setItems] = useState([])
+    // const [items, setItems] = useState(props.items)
+    const items = props.items
     const categories = ["Main", "Topping", "Side", "Drink"]
-    useEffect(() => {
-        setItems(props.items)
-    }, [])
+    // useEffect(() => {
+    //     setItems(props.items)
+    // }, [])
 
     const renderCategories = categories.map((category) => (
         <Category key={category}><a href={`#${category}`}>{category}</a></Category>
@@ -102,9 +96,7 @@ export default function ItemMenu(props) {
                 <Categories>
                     {renderCategories}
                 </Categories>
-                <ShoppingCart onClick={() => console.log("Open order list")}>
-                    <AiOutlineShoppingCart />
-                </ShoppingCart>
+                <ShoppingCart />
             </MenuContainer>
             {renderItems}
         </Main>
