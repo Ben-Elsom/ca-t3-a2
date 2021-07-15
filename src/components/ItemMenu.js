@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useReducer} from 'react'
 import styled from 'styled-components';
 import ItemCard from './item/ItemCard.js';
 import ShoppingCart from './orderList/ShoppingCart.js';
@@ -6,10 +6,8 @@ import OrderListModal from './orderList/OrderListModal.js';
 
 
 // Data
-import itemslist from '../data.js';
+import itemsList from '../data.js';
 import orders from '../data2.js';
-
-
 
 const Main = styled.div`
     margin-bottom: 50px;
@@ -65,15 +63,9 @@ const CategoryContainer = styled.div`
 `;
 
 export default function ItemMenu() {
-    // const [items, setItems] = useState(props.items)
-    const categories = ["Main", "Topping", "Side", "Drink"]
-    const items = itemslist;
-    // const [orderList, setOrderList] = useState(orders)
-    const orderList = orders;
-    const [openOrderList, setOpenOrderList] = useState(false)
 
-
-    const order = {
+    ///////////////////////////////////
+    const initialState = {
         orderId: 123,
         status: false,
         take_away: true,
@@ -84,7 +76,50 @@ export default function ItemMenu() {
         service_charge: 0.3,
         items: []
     }
+    
+    const types = {
+        TOGGLE_STATUS: 'TOGGLE_STATUS',
+        TOGGLE_TAKEAWAY: 'TOGGLE_TAKEAWAY',
+        UPDATE_PICKUP_TIME: 'UPDATE_PICKUP_TIME',
+        UPDATE_INSTRUCTION: 'UPDATE_INSTRUCTION',
+        UPDATE_SUB_COST: 'UPDATE_SUB_COST',
+        UPDATE_SERVICE_CHARGE: 'UPDATE_SERVICE_CHARGE',
+        ADD_ORDER_ITEM_BY_ID: 'ADD_ORDER_ITEM_BY_ID',
+        MINUS_ORDER_ITEM_BY_ID: 'MINUS_ORDER_ITEM_BY_ID'
+    }
 
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case types.TOGGLE_STATUS:
+                return state;
+            case types.TOGGLE_TAKEAWAY:
+                return { ...state, take_away: !state.take_away}
+            case types.UPDATE_PICKUP_TIME:
+                return state;
+            case types.UPDATE_INSTRUCTION:
+                return state;
+            case types.UPDATE_SUB_COST:
+                return state;
+            case types.UPDATE_SERVICE_CHARGE:
+                return state;
+            case types.ADD_ORDER_ITEM_BY_ID:
+                return state;
+            case types.MINUS_ORDER_ITEM_BY_ID:
+                return state;
+            default:
+                return state;
+        }
+    }  
+    ///////////////////////////////////
+
+    ///////////////////////////////////
+    const [something, dispatch] = useReducer(reducer, initialState);
+    ///////////////////////////////////
+
+    const categories = ["Main", "Topping", "Side", "Drink"]
+    const items = itemsList;
+    const orderList = orders;
+    const [openOrderList, setOpenOrderList] = useState(false)
 
     // This render the navbar of the menu
     const renderCategories = categories.map((category) => (
@@ -106,6 +141,7 @@ export default function ItemMenu() {
                                 price={item.price}
                                 description={item.description}
                                 thumbnail={item.thumbnail}
+                                addItem={() => dispatch({ type: types.ADD_ORDER_ITEM_BY_ID, value: item.id})}
                             />
                         ))
                     }
@@ -115,7 +151,7 @@ export default function ItemMenu() {
 
     return (
         <Main>
-            {console.log(order)}
+            {console.log(something)}
             <MenuContainer>
                 <Categories>
                     {renderCategories}
@@ -129,7 +165,12 @@ export default function ItemMenu() {
                 isOpen={openOrderList}
                 closeModal={() => setOpenOrderList(false)}
                 orders={orderList}
+                updatePickupTime={(pickupTime) => dispatch({type: types.UPDATE_PICKUP_TIME, value: pickupTime})}
+                makePayment={() => dispatch({type: types.TOGGLE_TAKEAWAY})}
             />
         </Main>
     )
 }
+
+
+// https://www.kindacode.com/article/react-usereducer-hook-tutorial-and-examples/

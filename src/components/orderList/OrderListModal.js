@@ -28,7 +28,7 @@ export default function OrderListModal(props) {
 
             <div className="orderList-topSection">
                 <h1 className='orderList-header'>Confirm Order</h1>
-                <PickupTime />
+                <PickupTime onSubmit={props.updatePickupTime}/>
                 {renderItems}  
             </div>
 
@@ -36,7 +36,10 @@ export default function OrderListModal(props) {
                 <SpecialInstruction />
                 <div className="orderList-sub-bottomSection">
                     <PaymentSummary />
-                    <button className='confirm-btn'>MAKE PAYMENT</button>
+                    <button
+                        className='confirm-btn'
+                        onClick={props.makePayment}
+                    >MAKE PAYMENT</button>
                 </div>
             </div>
         </Modal>
