@@ -3,6 +3,7 @@ import './OrderListModal.css';
 import Modal from 'react-modal';
 import PickupTime from './PickupTime.js';
 import OrderListItem from './OrderListItem.js';
+import PaymentSummary from './PaymentSummary';
 
 export default function OrderListModal(props) {
 
@@ -25,7 +26,10 @@ export default function OrderListModal(props) {
             <button className='close-btn' onClick={props.closeModal}>x</button>
             <h1 className='orderList-header'>Confirm Order</h1>
             <PickupTime />
-            {renderItems}            
+            {renderItems}
+
+            <PaymentSummary />
+            <button className='confirm-btn'>MAKE PAYMENT</button>
         </Modal>
     )
 }
