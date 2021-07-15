@@ -3,7 +3,6 @@ import './App.css';
 // import OrderPage from './pages/OrderPage.js';
 import Navbar from './components/navbar/Navbar.js';
 import ItemMenu from './components/ItemMenu.js';
-import data from './data.js';
 
 function App() {
   // const [user, setUser] = useState({
@@ -24,7 +23,7 @@ function App() {
     <div className="App">
       {/* <OrderPage /> */}
       <Navbar user={user}/>
-      <ItemMenu items={data} />
+      <ItemMenu/>
     </div>
   );
 }

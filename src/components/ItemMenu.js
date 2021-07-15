@@ -1,7 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
-import ItemCard from './ItemCard.js';
-import {AiOutlineShoppingCart} from 'react-icons/ai';
+import ItemCard from './item/ItemCard.js';
+import ShoppingCart from './orderList/ShoppingCart.js';
+import OrderListModal from './orderList/OrderListModal.js';
+
+
+// Data
+import itemslist from '../data.js';
+import orders from '../data2.js';
+
+
 
 const Main = styled.div`
     margin-bottom: 50px;
@@ -37,13 +45,6 @@ const Category = styled.li`
     }
 `;
 
-const ShoppingCart = styled.button`
-    font-size: 2.7rem;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-`;
-
 const CategoryTitle = styled.h1`
     text-align: center;
 `;
@@ -60,21 +61,37 @@ const CategoryContainer = styled.div`
     max-width: 1100px;
     margin: auto;
     flex-wrap: wrap;
-    /* border: 2px solid black; */
     justify-content: center;
 `;
 
-export default function ItemMenu(props) {
-    const [items, setItems] = useState([])
+export default function ItemMenu() {
+    // const [items, setItems] = useState(props.items)
     const categories = ["Main", "Topping", "Side", "Drink"]
-    useEffect(() => {
-        setItems(props.items)
-    }, [])
+    const items = itemslist;
+    // const [orderList, setOrderList] = useState(orders)
+    const orderList = orders;
+    const [openOrderList, setOpenOrderList] = useState(false)
 
+
+    const order = {
+        orderId: 123,
+        status: false,
+        take_away: true,
+        pickup_time: new Date(),
+        instruction: '',
+        userId: 99999,
+        sub_cost: 0.00,
+        service_charge: 0.3,
+        items: []
+    }
+
+
+    // This render the navbar of the menu
     const renderCategories = categories.map((category) => (
         <Category key={category}><a href={`#${category}`}>{category}</a></Category>
     ))
 
+    // This render all the items within the menu
     const renderItems = categories.map((category) => (
         <div key={category}>
                 <CategoryTitle id={category}>{category}</CategoryTitle>
@@ -98,15 +115,21 @@ export default function ItemMenu(props) {
 
     return (
         <Main>
+            {console.log(order)}
             <MenuContainer>
                 <Categories>
                     {renderCategories}
                 </Categories>
-                <ShoppingCart onClick={() => console.log("Open order list")}>
-                    <AiOutlineShoppingCart />
-                </ShoppingCart>
+                <ShoppingCart 
+                    openModal={() => setOpenOrderList(true)}
+                />
             </MenuContainer>
             {renderItems}
+            <OrderListModal
+                isOpen={openOrderList}
+                closeModal={() => setOpenOrderList(false)}
+                orders={orderList}
+            />
         </Main>
     )
 }
