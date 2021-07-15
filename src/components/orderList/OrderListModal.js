@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import PickupTime from './PickupTime.js';
 import OrderListItem from './OrderListItem.js';
 import PaymentSummary from './PaymentSummary';
+import SpecialInstruction from './SpecialInstruction';
 
 export default function OrderListModal(props) {
 
@@ -24,12 +25,20 @@ export default function OrderListModal(props) {
             ariaHideApp={false}
         >
             <button className='close-btn' onClick={props.closeModal}>x</button>
-            <h1 className='orderList-header'>Confirm Order</h1>
-            <PickupTime />
-            {renderItems}
 
-            <PaymentSummary />
-            <button className='confirm-btn'>MAKE PAYMENT</button>
+            <div className="orderList-topSection">
+                <h1 className='orderList-header'>Confirm Order</h1>
+                <PickupTime />
+                {renderItems}  
+            </div>
+
+            <div className="orderList-bottomSection">
+                <SpecialInstruction />
+                <div className="orderList-sub-bottomSection">
+                    <PaymentSummary />
+                    <button className='confirm-btn'>MAKE PAYMENT</button>
+                </div>
+            </div>
         </Modal>
     )
 }

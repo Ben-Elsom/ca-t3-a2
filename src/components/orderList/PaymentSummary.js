@@ -2,7 +2,10 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {AiFillCaretDown, AiFillCaretUp} from 'react-icons/ai';
 
-const Container = styled.div``;
+const Container = styled.div`
+    padding: 10px 20px 5px 20px;
+    background: #fff;
+`;
 
 const SummaryContainer = styled.div`
     margin-top: 10px;

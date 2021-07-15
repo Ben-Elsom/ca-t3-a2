@@ -71,10 +71,19 @@ export default function ItemMenu() {
     // const [orderList, setOrderList] = useState(orders)
     const orderList = orders;
     const [openOrderList, setOpenOrderList] = useState(false)
-    
-    // useEffect(() => {
-    //     setItems(props.items)
-    // }, [])
+
+
+    const order = {
+        orderId: 123,
+        status: false,
+        take_away: true,
+        pickup_time: new Date(),
+        instruction: '',
+        userId: 99999,
+        sub_cost: 0.00,
+        service_charge: 0.3,
+        items: []
+    }
 
 
     // This render the navbar of the menu
@@ -104,10 +113,9 @@ export default function ItemMenu() {
             </div>
     ))
 
-    
-
     return (
         <Main>
+            {console.log(order)}
             <MenuContainer>
                 <Categories>
                     {renderCategories}
