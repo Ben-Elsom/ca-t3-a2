@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {AiOutlineShoppingCart} from 'react-icons/ai';
-import OrderListModal from './OrderListModal.js';
 
 const ShoppingCartIcon = styled.button`
     font-size: 2.7rem;
@@ -11,16 +10,10 @@ const ShoppingCartIcon = styled.button`
 `;
 
 export default function ShoppingCart(props) {
-    const [orderList, setOrderList] = useState(false)
 
     return (
-        <ShoppingCartIcon onClick={() => setOrderList(true)}>
+        <ShoppingCartIcon onClick={props.openModal}>
             <AiOutlineShoppingCart />
-            {console.log(orderList)}
-            <OrderListModal
-                isOpen={orderList}
-                onRequestClose={() => setOrderList(false)}
-            />
         </ShoppingCartIcon>
     )
 }

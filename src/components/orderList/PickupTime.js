@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {BiEditAlt} from 'react-icons/bi';
 import SelectTime from './SelectTime.js';
-import {format, isDate, toDate} from 'date-fns';
+import {format} from 'date-fns';
 
 
 const Container = styled.div`
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     padding: 10px 8px;
     position: relative;
+    margin-bottom: 10px;
 `;
 
 const H4 = styled.h4`
@@ -31,13 +32,6 @@ const Icon = styled.button`
     cursor: pointer;
 `;
 
-const onSubmitHandler = (dateTime) =>{
-    dateTime.preventDefault();
-    console.log(dateTime);
-}
-
-
-
 export default function PickupTime() {
     const [dateTime, setDateTime] = useState(new Date());
     const [editing, setEditing] = useState(false);
@@ -49,7 +43,6 @@ export default function PickupTime() {
 
 return (
         <Container>
-            {/* {console.log(today)} */}
             <H4>PICK UP TIME</H4>
             {!editing &&
                 <div>
