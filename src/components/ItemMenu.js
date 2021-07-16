@@ -5,7 +5,7 @@ import RenderItemCards from './menu/RenderItemCards.js';
 import OrderListModal from './orderList/OrderListModal.js';
 
 // Data
-import itemsList from '../data.js';
+import itemsList from '../data/data.js';
 
 const Main = styled.div`
     margin-bottom: 50px;
