@@ -57,7 +57,10 @@ export default function ItemCard(props) {
             </ItemThumbnailBtn>
             <ItemName>{props.name}</ItemName>
             <ItemPrice>AUD $ {props.price}</ItemPrice>
-            <Button content="ADD +" onClickHandler={() => console.log("clicked")} />
+            <Button 
+                content="ADD +"
+                onClick={props.addItem}
+            />
         </ItemCardContainer>
     )
 }

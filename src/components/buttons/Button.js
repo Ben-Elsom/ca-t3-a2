@@ -10,6 +10,6 @@ const Btn = styled.button`
 `;
 export default function Button(props) {
     return(
-        <Btn onClick={props.onClickHandler}>{props.content}</Btn>
+        <Btn onClick={props.onClick}>{props.content}</Btn>
     )
 }

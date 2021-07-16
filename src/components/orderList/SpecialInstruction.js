@@ -10,7 +10,8 @@ const Container = styled.div`
 
 const P = styled.p`
     margin: 0 0 5px 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: bold;
 `;
 
 const TextField = styled.input`
@@ -23,7 +24,7 @@ export default function SpecialInstruction(props) {
     return (
         <Container>
             <P>SPECIAL INSTRUCTION :</P>
-            <TextField type='text' placeholder="Anything we could do for you?" />
+            <TextField type='text' placeholder="Anything we could do for you?" onChange={props.onChangeInstruction} defaultValue={props.instruction} />
             
         </Container>
     )

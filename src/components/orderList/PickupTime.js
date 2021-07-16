@@ -33,22 +33,16 @@ const Icon = styled.button`
     cursor: pointer;
 `;
 
-export default function PickupTime() {
-    const [dateTime, setDateTime] = useState(new Date());
+export default function PickupTime(props) {
     const [editing, setEditing] = useState(false);
     
-    
-    const OnChange = (e) => {
-        setDateTime(new Date(e.target.value))
-    }
-
 return (
         <Container>
             <H4>PICK UP TIME</H4>
             {!editing &&
                 <div>
-                    <P>DATE: {format(dateTime, "dd'-'MM'-'YYY")}</P>
-                    <P>TIME: {format(dateTime, "HH':'mm")}</P>
+                    <P>DATE: {format(props.pickupTime, "dd'-'MM'-'YYY")}</P>
+                    <P>TIME: {format(props.pickupTime, "HH':'mm")}</P>
                     <Icon onClick={() => setEditing(true)}>
                         <BiEditAlt />
                     </Icon>
@@ -56,7 +50,7 @@ return (
             }
             {editing &&
                 <SelectTime 
-                    onChange={OnChange}
+                onChangePickupTime={props.onChangePickupTime}
                     submit={() => setEditing(false)}
                 />
             }

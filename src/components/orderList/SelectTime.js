@@ -37,7 +37,7 @@ export default function SelectTime(props) {
                 max={format(addDays(new Date(), 7), "yyyy'-'MM'-'dd'T21:00'")}
                 required
                 name="dateTime"
-                onChange={props.onChange}
+                onChange={props.onChangePickupTime}
             /><span className='validate' />
             <Submit type='submit'>
                 <MdDone />
