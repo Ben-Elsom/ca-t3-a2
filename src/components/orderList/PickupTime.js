@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import styled from 'styled-components';
-import {BiEditAlt} from 'react-icons/bi';
+import {OrderContext} from '../../App.js';
 import SelectTime from './SelectTime.js';
 import {format} from 'date-fns';
+
+import {BiEditAlt} from 'react-icons/bi';
 
 
 const Container = styled.div`
@@ -34,31 +36,23 @@ const Icon = styled.button`
 `;
 
 export default function PickupTime() {
-    const [dateTime, setDateTime] = useState(new Date());
+    const orderContext= useContext(OrderContext)
     const [editing, setEditing] = useState(false);
     
-    
-    const OnChange = (e) => {
-        setDateTime(new Date(e.target.value))
-    }
-
 return (
         <Container>
             <H4>PICK UP TIME</H4>
             {!editing &&
                 <div>
-                    <P>DATE: {format(dateTime, "dd'-'MM'-'YYY")}</P>
-                    <P>TIME: {format(dateTime, "HH':'mm")}</P>
+                    <P>DATE: {format(orderContext.orderState.pickupTime, "dd'-'MM'-'YYY")}</P>
+                    <P>TIME: {format(orderContext.orderState.pickupTime, "HH':'mm")}</P>
                     <Icon onClick={() => setEditing(true)}>
                         <BiEditAlt />
                     </Icon>
                 </div>
             }
             {editing &&
-                <SelectTime 
-                    onChange={OnChange}
-                    submit={() => setEditing(false)}
-                />
+                <SelectTime submit={() => setEditing(false)} />
             }
         </Container>
     )

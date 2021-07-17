@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import styled from 'styled-components';
+import {OrderContext} from '../../App.js';
+
 import {AiFillCaretDown, AiFillCaretUp} from 'react-icons/ai';
 
 const Container = styled.div`
@@ -37,6 +39,7 @@ const H4 = styled.h4`
 `;
 
 export default function PaymentSummary(props) {
+    const orderContext = useContext(OrderContext);
     const [openDetail, setOpenDetail] = useState(false)
 
     return (
@@ -53,15 +56,15 @@ export default function PaymentSummary(props) {
             <SummaryContainer>
                 <SubContainer>
                     <P>SUBTOTAL</P>
-                    <P>AUD $ 30.00</P>
+                    <P>AUD $ *missing*</P>
                 </SubContainer>
                 <SubContainer>
                     <P>SERVICE CHARGE</P>
-                    <P>AUD $ 30.00</P>
+                    <P>AUD $ {orderContext.orderState.serviceCharge}</P>
                 </SubContainer>
                 <SubContainer>
                     <P>GST (INCL) 10%</P>
-                    <P>AUD $ 1.25</P>
+                    <P>AUD $ *missing*</P>
                 </SubContainer>
             </SummaryContainer>
             }

@@ -1,10 +1,10 @@
-import ramenThumbnail from './imgs/ramen_thumbnail.png';
+import ramenThumbnail from '../imgs/ramen_thumbnail.png';
 
 const items = [
   {
     id: 1001,
     name: 'Shoyu Ramen',
-    price: '15.00',
+    unitPrice: '13.00',
     thumbnail: ramenThumbnail,
     description: "Shoyu is very yummy",
     category: "Main"
@@ -12,7 +12,7 @@ const items = [
   {
     id: 1002,
     name: 'Miso Ramen',
-    price: '15.00',
+    unitPrice: '14.00',
     thumbnail: ramenThumbnail,
     description: "Miso Ramen is very yummy",
     category: "Main"
@@ -20,7 +20,7 @@ const items = [
   {
     id: 1003,
     name: 'Tonkatsu Ramen',
-    price: '15.00',
+    unitPrice: '15.00',
     thumbnail: ramenThumbnail,
     description: "Tonkatsu Ramen very yummy",
     category: "Main"
@@ -28,7 +28,7 @@ const items = [
   {
     id: 1004,
     name: 'Coke 750ml',
-    price: "2.50",
+    unitPrice: "2.50",
     thumbnail: ramenThumbnail,
     description: '',
     category: "Drink"
@@ -36,7 +36,7 @@ const items = [
   {
     id: 1005,
     name: 'Chicken Karage (6Pc)',
-    price: "8.00",
+    unitPrice: "8.00",
     thumbnail: ramenThumbnail,
     description: '',
     category: "Side"
@@ -44,7 +44,7 @@ const items = [
   {
     id: 1006,
     name: 'Onsen Egg',
-    price: "1.50",
+    unitPrice: "1.50",
     thumbnail: ramenThumbnail,
     description: '',
     category: "Topping"

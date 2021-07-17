@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Btn = styled.button`
-    width: 90%;
+    width: 100%;
     background-color: #000;
     height: 30px;
     border-radius: 20px;
@@ -10,6 +10,6 @@ const Btn = styled.button`
 `;
 export default function Button(props) {
     return(
-        <Btn onClick={props.onClickHandler}>{props.content}</Btn>
+        <Btn onClick={props.onClick}>{props.content}</Btn>
     )
 }

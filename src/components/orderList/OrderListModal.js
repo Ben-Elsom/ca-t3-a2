@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react';
 import './OrderListModal.css';
+import {OrderContext, ACTIONS} from '../../App.js';
+
 import Modal from 'react-modal';
 import PickupTime from './PickupTime.js';
 import OrderListItem from './OrderListItem.js';
@@ -7,14 +9,33 @@ import PaymentSummary from './PaymentSummary';
 import SpecialInstruction from './SpecialInstruction';
 
 export default function OrderListModal(props) {
+    const orderContext = useContext(OrderContext)
 
-    const renderItems = props.orders.map((item) =>
-        <OrderListItem
-            key={item.name}
-            name={item.name}
-            unitPrice={item.unitPrice}
-            qty={item.qty}
-        />
+    const addItemBy1 = (target, list) => {
+        return(
+            list.map( item => {
+                if(item.itemId === target){
+                    console.log(item.itemId)
+                    console.log(item.qty)
+                }
+                return item
+            })
+        )
+    }
+
+    const renderItems = orderContext.orderState.orderedItems.map((item, index) =>
+            <OrderListItem
+                key={index}
+                index={index}
+                name={item.name}
+                unitPrice={item.unitPrice}
+                qty={item.qty}
+                // addHandler={}
+                // subtractHandler={() => orderContext.orderDispatch({
+                //     type: ACTIONS.REMOVE_ITEM_FROM_ORDER,
+                //     value: index
+                // })}
+            />
     )
 
     return (
@@ -36,7 +57,14 @@ export default function OrderListModal(props) {
                 <SpecialInstruction />
                 <div className="orderList-sub-bottomSection">
                     <PaymentSummary />
-                    <button className='confirm-btn'>MAKE PAYMENT</button>
+                    <button
+                        className='confirm-btn'
+                        onClick={() =>
+                            orderContext.orderDispatch({
+                                type: ACTIONS.TOGGLE_TAKEAWAY  
+                            })
+                        }
+                    >MAKE PAYMENT</button>
                 </div>
             </div>
         </Modal>

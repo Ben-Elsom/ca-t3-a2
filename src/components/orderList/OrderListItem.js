@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components';
 import QtyButton from '../buttons/QtyButton.js';
+
+import {OrderContext, ACTIONS} from '../../App.js';
 
 const Container = styled.div`
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
@@ -29,23 +31,45 @@ const Price = styled.p`
 `;
 
 export default function OrderListItem(props) {
-    const [qty, setQty] = useState(props.qty);
+    const orderContext = useContext(OrderContext);
 
     return (
-        <Container>
+        <Container >
             <ItemName>{props.name}</ItemName>
             <QtyContainer>
                 <QtyButton 
-                    qty={qty}
-                    add={() => setQty(qty + 1)}
-                    minus={() => {
-                        if(qty > 0){
-                            setQty(qty - 1)
-                        }
-                    }}
+                    qty={props.qty}
+                    add={() => console.log("add by 1")}
+                    subtract={() => console.log("subtract by 1")}
+                    // subtract={() => orderContext.orderDispatch({
+                    //     type: ACTIONS.REMOVE_ITEM_FROM_ORDER,
+                    //     value: props.index
+                    // })}
+                    minimum={-1}
                 />
-                <Price>AUD $ {props.unitPrice * qty}</Price>
+                <Price>AUD $ {props.unitPrice * props.qty}</Price>
             </QtyContainer>
         </Container>
     )
 }
+
+    // return orderContext.orderState.orderedItems.map((item) =>
+    //     // console.log(item.name)
+    //     <Container key={item.itemId}>
+    //         {/* <ItemName>{item.name}</ItemName> */}
+    //         <QtyContainer>
+    //             <QtyButton 
+    //                 qty={item.qty}
+    //                 add={
+    //                     orderContext.orderDispatch({
+    //                         type: ACTIONS.ADD_ITEM_BY_1,
+    //                         value: addItem(item.id)
+    //                     })
+    //                 }
+    //                 // subtract={() => setQty(qty - 1)}
+    //                 minimum={0}
+    //             />
+    //             <Price>AUD $ {item.unitPrice * item.qty}</Price>
+    //         </QtyContainer>
+    //     </Container>
+    // )
