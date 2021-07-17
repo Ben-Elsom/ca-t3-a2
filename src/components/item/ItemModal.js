@@ -22,12 +22,16 @@ export default function ItemModal(props) {
                 <QtyButton 
                     qty={qty}
                     add={() => setQty(qty + 1)}
-                    subtract={() => setQty(qty - 1)}
-                    minimum={1}
+                    subtract={() => {
+                        if(qty>1){
+                            setQty(qty - 1)
+                        }
+                    }}
                 />
                 <button
                     className="item-btn-add"
-                    // missing on click
+                    // missing on click action
+                    onClick={() => console.log("add item to order list")}
                 >
                     ADD +
                 </button>

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components';
 import QtyButton from '../buttons/QtyButton.js';
+
+import {OrderContext, ACTIONS} from '../../App.js';
 
 const Container = styled.div`
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
@@ -29,15 +31,21 @@ const Price = styled.p`
 `;
 
 export default function OrderListItem(props) {
+    const orderContext = useContext(OrderContext);
+
     return (
         <Container >
             <ItemName>{props.name}</ItemName>
             <QtyContainer>
                 <QtyButton 
                     qty={props.qty}
-                    add={props.addBy1}
-                    subtract={props.subtractBy1}
-                    minimum={0}
+                    add={() => console.log("add by 1")}
+                    subtract={() => console.log("subtract by 1")}
+                    // subtract={() => orderContext.orderDispatch({
+                    //     type: ACTIONS.REMOVE_ITEM_FROM_ORDER,
+                    //     value: props.index
+                    // })}
+                    minimum={-1}
                 />
                 <Price>AUD $ {props.unitPrice * props.qty}</Price>
             </QtyContainer>

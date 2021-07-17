@@ -11,29 +11,31 @@ import SpecialInstruction from './SpecialInstruction';
 export default function OrderListModal(props) {
     const orderContext = useContext(OrderContext)
 
-    const addBy1 = (id) => {
+    const addItemBy1 = (target, list) => {
         return(
-            orderContext.orderState.orderedItems.map( item =>{
-                if(item.itemId === id){
-                    item.qty += 1
+            list.map( item => {
+                if(item.itemId === target){
+                    console.log(item.itemId)
+                    console.log(item.qty)
                 }
                 return item
             })
         )
     }
 
-    const renderItems = orderContext.orderState.orderedItems.map((item) =>
-        <OrderListItem
-            key={item.id}
-            name={item.name}
-            unitPrice={item.unitPrice}
-            qty={item.qty}
-            addBy1={() => orderContext.orderDispatch({
-                type: ACTIONS.ADD_ITEM_BY_1,
-                value: addBy1(item.id)
-            })}
-            subtractBy1={() => console.log("subtract by 1")}
-        />
+    const renderItems = orderContext.orderState.orderedItems.map((item, index) =>
+            <OrderListItem
+                key={index}
+                index={index}
+                name={item.name}
+                unitPrice={item.unitPrice}
+                qty={item.qty}
+                // addHandler={}
+                // subtractHandler={() => orderContext.orderDispatch({
+                //     type: ACTIONS.REMOVE_ITEM_FROM_ORDER,
+                //     value: index
+                // })}
+            />
     )
 
     return (

@@ -40,7 +40,7 @@ export default function SelectTime(props) {
                 min={format(addMinutes(new Date(), 15), "yyyy'-'MM'-'dd'T'HH':'mm")}
                 max={format(addDays(new Date(), 7), "yyyy'-'MM'-'dd'T21:00'")}
                 required
-                name="dateTime"
+                defaultValue={format(orderContext.orderState.pickupTime, "yyyy'-'MM'-'dd'T'HH':'mm")}
                 onChange={(e) => orderContext.orderDispatch({
                     type: ACTIONS.ONCHANGE_PICKUP_TIME,
                     value: new Date(e.target.value)

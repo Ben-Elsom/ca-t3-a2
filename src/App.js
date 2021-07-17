@@ -47,9 +47,10 @@ export const OrderContext = React.createContext();
           case ACTIONS.UPDATE_SUB_COST:
               return order;
           case ACTIONS.ADD_ITEM_BY_1:
-              return {...order, orderedItems: action.value};
+              return {...order, orderedItems: action.value}; //NOT YET
           case ACTIONS.SUBTRACT_ITEM_BY_1:
-              return order;
+              return {...order, orderItems: action.value}; //NOT YET
+
           // Would be great to create an orderedItem object later
           case ACTIONS.ADD_ITEM_TO_ORDER:
               return {
@@ -65,7 +66,11 @@ export const OrderContext = React.createContext();
                 ]
               }
           case ACTIONS.REMOVE_ITEM_FROM_ORDER:
-              return order;
+              return console.log(action.value) //NOT YET
+              // {
+              //   ...order,
+              //   orderItems: order.orderedItems.filter((item, index) => index != action.value)
+              // }
           default:
               return order;
       }
@@ -82,20 +87,6 @@ function App() {
   }
 
   const [order, dispatch] = useReducer(reducer, initialOrder);
-
-  // const findItem = (itemName, targetList) => {
-  //   let selectedItem = null
-  //   targetList.forEach( item => {
-  //     if(item.name === itemName) {
-  //       return selectedItem = item
-  //     }
-  //   })
-  //   return selectedItem;
-  // }
-
-  // const containItem = (item) => {
-  //   order.
-  // }
 
   return (
     <OrderContext.Provider value={{ orderState: order, orderDispatch: dispatch}}>
