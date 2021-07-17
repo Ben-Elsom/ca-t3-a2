@@ -1,6 +1,5 @@
-import React, {useState, useContext} from 'react'
+import React from 'react'
 import styled from 'styled-components';
-import { OrderContext, ACTIONS } from '../../App.js';
 import QtyButton from '../buttons/QtyButton.js';
 
 const Container = styled.div`
@@ -29,21 +28,40 @@ const Price = styled.p`
     margin: 0 0 0 10px;
 `;
 
-export default function OrderListItem() {
-    const orderContext = useContext(OrderContext);
-
-    return orderContext.orderState.orderedItems.map((item) =>
-        <Container key={item.id}>
-            <ItemName>{item.name}</ItemName>
+export default function OrderListItem(props) {
+    return (
+        <Container >
+            <ItemName>{props.name}</ItemName>
             <QtyContainer>
                 <QtyButton 
-                    qty={item.qty}
-                    // add={() => setQty(qty + 1)}
-                    // minus={() => setQty(qty - 1)}
+                    qty={props.qty}
+                    add={props.addBy1}
+                    subtract={props.subtractBy1}
                     minimum={0}
                 />
-                <Price>AUD $ {item.unitPrice * item.qty}</Price>
+                <Price>AUD $ {props.unitPrice * props.qty}</Price>
             </QtyContainer>
         </Container>
     )
 }
+
+    // return orderContext.orderState.orderedItems.map((item) =>
+    //     // console.log(item.name)
+    //     <Container key={item.itemId}>
+    //         {/* <ItemName>{item.name}</ItemName> */}
+    //         <QtyContainer>
+    //             <QtyButton 
+    //                 qty={item.qty}
+    //                 add={
+    //                     orderContext.orderDispatch({
+    //                         type: ACTIONS.ADD_ITEM_BY_1,
+    //                         value: addItem(item.id)
+    //                     })
+    //                 }
+    //                 // subtract={() => setQty(qty - 1)}
+    //                 minimum={0}
+    //             />
+    //             <Price>AUD $ {item.unitPrice * item.qty}</Price>
+    //         </QtyContainer>
+    //     </Container>
+    // )

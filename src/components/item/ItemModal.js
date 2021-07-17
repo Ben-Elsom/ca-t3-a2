@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import './ItemModal.css';
 import Modal from 'react-modal';
 import QtyButton from '../buttons/QtyButton.js';
-import Button from '../buttons/Button.js';
 
 export default function ItemModal(props) {
     const [qty, setQty] = useState(1)
@@ -23,7 +22,7 @@ export default function ItemModal(props) {
                 <QtyButton 
                     qty={qty}
                     add={() => setQty(qty + 1)}
-                    minus={() => setQty(qty - 1)}
+                    subtract={() => setQty(qty - 1)}
                     minimum={1}
                 />
                 <button

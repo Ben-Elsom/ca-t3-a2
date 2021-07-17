@@ -11,6 +11,31 @@ import SpecialInstruction from './SpecialInstruction';
 export default function OrderListModal(props) {
     const orderContext = useContext(OrderContext)
 
+    const addBy1 = (id) => {
+        return(
+            orderContext.orderState.orderedItems.map( item =>{
+                if(item.itemId === id){
+                    item.qty += 1
+                }
+                return item
+            })
+        )
+    }
+
+    const renderItems = orderContext.orderState.orderedItems.map((item) =>
+        <OrderListItem
+            key={item.id}
+            name={item.name}
+            unitPrice={item.unitPrice}
+            qty={item.qty}
+            addBy1={() => orderContext.orderDispatch({
+                type: ACTIONS.ADD_ITEM_BY_1,
+                value: addBy1(item.id)
+            })}
+            subtractBy1={() => console.log("subtract by 1")}
+        />
+    )
+
     return (
         <Modal
             isOpen={props.isOpen}
@@ -23,7 +48,7 @@ export default function OrderListModal(props) {
             <div className="orderList-topSection">
                 <h1 className='orderList-header'>Confirm Order</h1>
                 <PickupTime />
-                <OrderListItem />
+                {renderItems}  
             </div>
 
             <div className="orderList-bottomSection">
