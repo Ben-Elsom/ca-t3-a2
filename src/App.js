@@ -1,5 +1,8 @@
 import React, {useReducer} from 'react';
+import {BrowserRouter, Switch, Route, Redirect, Link} from 'react-router-dom'
 import './App.css';
+
+
 import Navbar from './components/navbar/Navbar.js';
 import ItemMenu from './components/ItemMenu.js';
 import data1 from './data/data.js';
@@ -8,6 +11,12 @@ export const OrderContext = React.createContext();
 
   const categories = ["Main", "Topping", "Side", "Drink"];
   const itemList = data1;
+  const user = {
+    email: "example@email.com",
+    firstName: "Bob",
+    lastName: "Smith",
+    membershipPoints: 15
+  }  
   ///////////////// useReducer setup //////////////////
   const initialOrder = {
     orderId: 123,
@@ -79,28 +88,43 @@ export const OrderContext = React.createContext();
   ///////////////// end of useReducer setup //////////////////
 
 function App() {
-  const user = {
-    email: "example@email.com",
-    firstName: "Bob",
-    lastName: "Smith",
-    membershipPoints: 15
-  }
-
   const [order, dispatch] = useReducer(reducer, initialOrder);
 
   return (
-    <OrderContext.Provider value={{ orderState: order, orderDispatch: dispatch}}>
-
-      {console.log(order)}
-      <div className="App">
+    <OrderContext.Provider
+      value={{ orderState: order, orderDispatch: dispatch}}
+    >
+      {/* {console.log(order)} */}
+      <BrowserRouter className='App'>
         <Navbar user={user}/>
-        <ItemMenu
-          itemList={itemList}
-          categories={categories}
-        />
-      </div>
+        <Switch>
+          {/* Route for home page */}
+          <Route exact path='/'>
+            <h1>Home Page</h1>
+            <Link to='/order'>ORDER NOW</Link>
+            <Link to='/user'>User</Link>
+            <Link to='/item'>Item (not working)</Link>
+          </Route>
+          {/* Route for ordering */}
+          <Route exact path='/order'>
+            <ItemMenu
+              itemList={itemList}
+              categories={categories}
+            />
+          </Route>
+          {/* Route for editing user */}
+          <Route path='/user/' render={() => <h1>This page is for editing a user account</h1>} />
+          {/* Route for editing item */}
+          <Route path='/item/:id' render={() => <h1>This page is for editing item</h1>} />
+          {/* Route for redirection */}
+          <Route><Redirect to='/' /></Route>
+        </Switch>
+      </BrowserRouter>
     </OrderContext.Provider>
   );
 }
 
 export default App;
+
+
+// https://reactrouter.com/web/guides/quick-start
