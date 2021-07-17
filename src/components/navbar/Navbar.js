@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './Navbar.css';
+import {Link} from 'react-router-dom';
 import logo from '../../imgs/logo.png';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {IoCloseSharp} from 'react-icons/io5';
@@ -12,7 +13,9 @@ export default function Navbar (props) {
         <nav>
             <div className='nav-container'>
                 <div className='logo-container'>
-                    <img className='logo' src={logo} alt='KON Ramen Logo' />
+                    <Link to='/'>
+                        <img className='logo' src={logo} alt='KON Ramen Logo' />
+                    </Link>
                     <button className='menu-btn' onClick={() => setNavbar(!navbar)}>
                         { navbar ? <IoCloseSharp /> : <GiHamburgerMenu /> }
                     </button>
