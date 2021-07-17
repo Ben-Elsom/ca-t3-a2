@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import styled from 'styled-components';
+import { OrderContext, ACTIONS } from '../../App.js';
 import QtyButton from '../buttons/QtyButton.js';
 
 const Container = styled.div`
@@ -28,23 +29,20 @@ const Price = styled.p`
     margin: 0 0 0 10px;
 `;
 
-export default function OrderListItem(props) {
-    const [qty, setQty] = useState(props.qty);
+export default function OrderListItem() {
+    const orderContext = useContext(OrderContext);
 
-    return (
-        <Container>
-            <ItemName>{props.name}</ItemName>
+    return orderContext.orderState.orderedItems.map((item) =>
+        <Container key={item.id}>
+            <ItemName>{item.name}</ItemName>
             <QtyContainer>
                 <QtyButton 
-                    qty={qty}
-                    add={() => setQty(qty + 1)}
-                    minus={() => {
-                        if(qty > 0){
-                            setQty(qty - 1)
-                        }
-                    }}
+                    qty={item.qty}
+                    // add={() => setQty(qty + 1)}
+                    // minus={() => setQty(qty - 1)}
+                    minimum={0}
                 />
-                <Price>AUD $ {props.unitPrice * qty}</Price>
+                <Price>AUD $ {item.unitPrice * item.qty}</Price>
             </QtyContainer>
         </Container>
     )

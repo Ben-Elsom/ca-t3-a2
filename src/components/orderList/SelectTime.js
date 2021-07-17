@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
-import {MdDone} from 'react-icons/md';
+import {OrderContext, ACTIONS} from '../../App.js';
 import { format, addMinutes, addDays} from 'date-fns';
+
+import {MdDone} from 'react-icons/md';
 
 const Form = styled.form`
     display: flex;
@@ -28,6 +30,8 @@ const Submit = styled.button`
 `;
 
 export default function SelectTime(props) {
+    const orderContext= useContext(OrderContext)
+
     return (
         <Form onSubmit={props.submit}>
             {/* Date time selection, minimum is 15 min from now, maximum is 7 days from now */}
@@ -37,7 +41,10 @@ export default function SelectTime(props) {
                 max={format(addDays(new Date(), 7), "yyyy'-'MM'-'dd'T21:00'")}
                 required
                 name="dateTime"
-                onChange={props.onChangePickupTime}
+                onChange={(e) => orderContext.orderDispatch({
+                    type: ACTIONS.ONCHANGE_PICKUP_TIME,
+                    value: new Date(e.target.value)
+                })}
             /><span className='validate' />
             <Submit type='submit'>
                 <MdDone />

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
+import {OrderContext, ACTIONS} from '../../App.js';
 
 const Container = styled.div`
     margin: 0px 20px 10px 20px;
@@ -20,11 +21,20 @@ const TextField = styled.input`
     font-size: 1rem;
 `;
 
-export default function SpecialInstruction(props) {
+export default function SpecialInstruction() {
+    const orderContext= useContext(OrderContext)
+
     return (
         <Container>
             <P>SPECIAL INSTRUCTION :</P>
-            <TextField type='text' placeholder="Anything we could do for you?" onChange={props.onChangeInstruction} defaultValue={props.instruction} />
+            <TextField
+                type='text'
+                placeholder="Anything we could do for you?"
+                onChange={(e) => orderContext.orderDispatch({
+                    type: ACTIONS.ONCHANGE_INSTRUCTION,
+                    value: e.target.value
+                })}
+                defaultValue={orderContext.orderState.instruction} />
             
         </Container>
     )

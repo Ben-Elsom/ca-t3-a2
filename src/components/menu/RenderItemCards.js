@@ -18,19 +18,20 @@ const CategoryContainer = styled.div`
 export default function RenderItemCards(props) {
 
     const categories = props.categories;
-    const items = props.items;
+    const itemList = props.itemList;
 
     return categories.map((category) => (
         <div key={category}>
             <CategoryTitle id={category}>{category}</CategoryTitle>
             <CategoryContainer>
                 {
-                    items.filter((item) => item.category === category)
+                    itemList.filter((item) => item.category === category)
                     .map((item) => (
                         <ItemCard
                             key={item.id}
+                            id={item.id}
                             name={item.name}
-                            price={item.price}
+                            unitPrice={item.unitPrice}
                             description={item.description}
                             thumbnail={item.thumbnail}
                             addItem={props.addItem}

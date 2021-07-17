@@ -32,7 +32,7 @@ export default function QtyButton(props) {
 
     return (
         <Container>
-            <Btn onClick={props.minus}>-</Btn>
+            <Btn onClick={(props.qty > props.minimum) ? props.minus : null}>-</Btn>
             <Qty>{props.qty}</Qty>
             <Btn onClick={props.add}>+</Btn>
         </Container>

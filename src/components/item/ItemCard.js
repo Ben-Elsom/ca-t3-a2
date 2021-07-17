@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Button from '../buttons/Button';
 import styled from 'styled-components';
 import ItemModal from './ItemModal.js';
+import {OrderContext, ACTIONS} from '../../App.js';
+
 
 const ItemCardContainer = styled.div`
     background-color: #fff;
@@ -10,6 +12,7 @@ const ItemCardContainer = styled.div`
     height: 300px;
     display: flex;
     justify-content: center;
+    /* align-items: center; */
     flex-direction: column;
     margin: 10px;
     padding: 10px;
@@ -32,6 +35,7 @@ const ItemName = styled.p`
     margin: 5px;
     font-size: 1.3rem;
     font-weight: bold; 
+    
 `;
 
 const ItemPrice = styled.p`
@@ -40,7 +44,8 @@ const ItemPrice = styled.p`
 `;
 
 export default function ItemCard(props) {
-    const [itemModal, setItemModal] = useState(false)
+    const orderContext = useContext(OrderContext);
+    const [itemModal, setItemModal] = useState(false);
 
     return (
         <ItemCardContainer>
@@ -48,7 +53,7 @@ export default function ItemCard(props) {
                 isOpen={itemModal}
                 closeModal={() => setItemModal(false)}
                 name={props.name}
-                price={props.price}
+                unitPrice={props.unitPrice}
                 thumbnail={props.thumbnail}
                 description={props.description}
             />
@@ -56,10 +61,17 @@ export default function ItemCard(props) {
                 <ItemThumbnail src={props.thumbnail} alt='item thumbnail'/>
             </ItemThumbnailBtn>
             <ItemName>{props.name}</ItemName>
-            <ItemPrice>AUD $ {props.price}</ItemPrice>
+            <ItemPrice>AUD $ {props.unitPrice}</ItemPrice>
             <Button 
                 content="ADD +"
-                onClick={props.addItem}
+                onClick={() => orderContext.orderDispatch({
+                    type: ACTIONS.ADD_ITEM_TO_ORDER,
+                    value: {
+                        id: props.id,
+                        name: props.name,
+                        unitPrice: props.unitPrice
+                    }
+                })}
             />
         </ItemCardContainer>
     )

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react';
 import './OrderListModal.css';
+import {OrderContext, ACTIONS} from '../../App.js';
+
 import Modal from 'react-modal';
 import PickupTime from './PickupTime.js';
 import OrderListItem from './OrderListItem.js';
@@ -7,15 +9,7 @@ import PaymentSummary from './PaymentSummary';
 import SpecialInstruction from './SpecialInstruction';
 
 export default function OrderListModal(props) {
-
-    const renderItems = props.orders.map((item) =>
-        <OrderListItem
-            key={item.name}
-            name={item.name}
-            unitPrice={item.unitPrice}
-            qty={item.qty}
-        />
-    )
+    const orderContext = useContext(OrderContext)
 
     return (
         <Modal
@@ -28,23 +22,21 @@ export default function OrderListModal(props) {
 
             <div className="orderList-topSection">
                 <h1 className='orderList-header'>Confirm Order</h1>
-                <PickupTime 
-                    pickupTime={props.pickupTime}
-                    onChangePickupTime={props.onChangePickupTime}
-                />
-                {renderItems}  
+                <PickupTime />
+                <OrderListItem />
             </div>
 
             <div className="orderList-bottomSection">
-                <SpecialInstruction 
-                    instruction={props.instruction}
-                    onChangeInstruction={props.onChangeInstruction}
-                />
+                <SpecialInstruction />
                 <div className="orderList-sub-bottomSection">
                     <PaymentSummary />
                     <button
                         className='confirm-btn'
-                        onClick={props.makePayment}
+                        onClick={() =>
+                            orderContext.orderDispatch({
+                                type: ACTIONS.TOGGLE_TAKEAWAY  
+                            })
+                        }
                     >MAKE PAYMENT</button>
                 </div>
             </div>
