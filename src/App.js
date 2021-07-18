@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useState} from 'react';
 import {BrowserRouter, Switch, Route, Redirect, Link} from 'react-router-dom'
 import './App.css';
 
@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage.js'
 import ItemMenu from './components/ItemMenu.js';
 import ItemForm from './pages/ItemForm.js';
 import UserForm from './pages/UserForm.js';
+import LoginForm from './pages/LoginForm.js';
 import data1 from './data/data.js';
 
 export const OrderContext = React.createContext();
@@ -92,6 +93,7 @@ export const OrderContext = React.createContext();
 
 function App() {
   const [order, dispatch] = useReducer(reducer, initialOrder);
+  const [loggedIn, setLoggedIn] = useState(false)
 
   return (
     <OrderContext.Provider
@@ -99,7 +101,8 @@ function App() {
     >
       {/* {console.log(order)} */}
       <BrowserRouter className='App'>
-        <Navbar user={user}/>
+        <button onClick={() => setLoggedIn(!loggedIn)}>Toggle Login</button>
+        <Navbar user={user} loggedIn={loggedIn}/>
         <Switch className='main-content'>
 
           {/* Route for home page */}
@@ -115,13 +118,18 @@ function App() {
             />
           </Route>
           
-          {/* Route for editing user */}
-          <Route exact path='/user'>
-            <UserForm
-              edit={true}
-            />
-          
+          {/* Route for login */}
+          <Route exact path='/user/login'>
+            <LoginForm />
           </Route>
+
+          {/* Route for editing user */}
+          <Route exact path='/user/create'>
+            <UserForm
+              edit={false}
+            />
+          </Route>
+
           {/* Route for editing item */}
           <Route path='/item'>
             <ItemForm />

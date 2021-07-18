@@ -38,19 +38,21 @@ export default function Navbar (props) {
                                 <p className='nav-link-name'>Order Online Now!</p>
                             </Link>
                         </li>
-                        <li className='nav-link'>
-                            <Link to='/user'>
-                                <MdAccountCircle className='nav-icon' />
-                                <p className='nav-link-name'>Edit Account</p>
-                            </Link>
-                        </li>
-                        <li className='nav-link'>
-                            {props.logedIn ? 
+                        {props.loggedIn &&
+                            <li className='nav-link'>
                                 <Link to='/user'>
+                                    <MdAccountCircle className='nav-icon' />
+                                    <p className='nav-link-name'>Edit Account</p>
+                                </Link>
+                            </li>
+                        }
+                        <li className='nav-link'>
+                            {props.loggedIn ? 
+                                <Link to='/'>
                                     <BiLogOut className='nav-icon' />
                                     <p className='nav-link-name'>Log Out</p>
                                 </Link> :
-                                <Link to='/user'>
+                                <Link to='/user/login'>
                                     <BiLogIn className='nav-icon' />
                                     <p className='nav-link-name'>Log In</p>
                                 </Link>

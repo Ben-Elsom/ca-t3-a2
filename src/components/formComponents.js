@@ -42,7 +42,7 @@ const CheckBoxField = styled.input`
     transition: 0.3s;
 
     &:checked {
-        background: lightgreen;
+        background: #90EE90;
     }
 
     &:before {
