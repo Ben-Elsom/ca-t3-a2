@@ -31,7 +31,7 @@ export default function UserForm(props) {
                 <TextInput
                     label='First Name :'
                     name='firstName'
-                    onChange={() => console.log('firtName')}
+                    onChange={() => console.log('firstName')}
                     defaultValue=''
                     placeholder='Please insert your first name'
                 />

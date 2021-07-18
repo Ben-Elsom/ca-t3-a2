@@ -101,7 +101,9 @@ function App() {
     >
       {/* {console.log(order)} */}
       <BrowserRouter className='App'>
-        <button onClick={() => setLoggedIn(!loggedIn)}>Toggle Login</button>
+        <button onClick={() => setLoggedIn(!loggedIn)}>
+          {loggedIn ? 'Log out' : 'Log in'}
+        </button>
         <Navbar user={user} loggedIn={loggedIn}/>
         <Switch className='main-content'>
 
@@ -124,9 +126,16 @@ function App() {
           </Route>
 
           {/* Route for editing user */}
+          <Route exact path='/user/edit'>
+            <UserForm
+              edit={loggedIn}
+            />
+          </Route>
+
+          {/* Route for editing user */}
           <Route exact path='/user/create'>
             <UserForm
-              edit={false}
+              edit={loggedIn}
             />
           </Route>
 

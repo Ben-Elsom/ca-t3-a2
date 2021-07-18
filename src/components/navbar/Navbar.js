@@ -40,7 +40,7 @@ export default function Navbar (props) {
                         </li>
                         {props.loggedIn &&
                             <li className='nav-link'>
-                                <Link to='/user'>
+                                <Link to='/user/edit'>
                                     <MdAccountCircle className='nav-icon' />
                                     <p className='nav-link-name'>Edit Account</p>
                                 </Link>
