@@ -7,6 +7,7 @@ const Main = styled.main`
     max-width: 900px;
     display: flex;
     flex-direction: column;
+    margin: auto;
 `;
 
 const Header = styled.h2`

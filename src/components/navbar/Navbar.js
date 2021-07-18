@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import './Navbar.css';
 import {Link} from 'react-router-dom';
 import logo from '../../imgs/logo.png';
-import {GiHamburgerMenu} from 'react-icons/gi';
+import {GiHamburgerMenu, GiNoodles} from 'react-icons/gi';
 import {IoCloseSharp} from 'react-icons/io5';
+import {BiLogOut, BiLogIn} from 'react-icons/bi';
+import {MdAccountCircle} from 'react-icons/md';
+import {HiHome} from 'react-icons/hi';
 
 export default function Navbar (props) {
     const [navbar, setNavbar] = useState(true)
@@ -23,10 +26,36 @@ export default function Navbar (props) {
                 </div>
                 <div className='nav-links-container'>
                     <ul className={navbar ? 'nav-links' : 'nav-links hide-nav'}>
-                        <li className='nav-link'>Hi, {props.user.firstName} !</li>
-                        <li className='nav-link'>Membership Points : {props.user.membershipPoints}</li>
-                        <li className='nav-link'><a href='/'>Edit Profile</a></li>
-                        <li className='nav-link'><a href='/'>Logout</a></li>
+                        <li className='nav-link'>
+                            <Link to='/'>
+                                <HiHome className='nav-icon'/>
+                                <p className='nav-link-name'>Home</p>
+                            </Link>
+                        </li>
+                        <li className='nav-link'>
+                            <Link to='/order'>
+                                <GiNoodles className='nav-icon'/>
+                                <p className='nav-link-name'>Order Online Now!</p>
+                            </Link>
+                        </li>
+                        <li className='nav-link'>
+                            <Link to='/user'>
+                                <MdAccountCircle className='nav-icon' />
+                                <p className='nav-link-name'>Edit Account</p>
+                            </Link>
+                        </li>
+                        <li className='nav-link'>
+                            {props.logedIn ? 
+                                <Link to='/user'>
+                                    <BiLogOut className='nav-icon' />
+                                    <p className='nav-link-name'>Log Out</p>
+                                </Link> :
+                                <Link to='/user'>
+                                    <BiLogIn className='nav-icon' />
+                                    <p className='nav-link-name'>Log In</p>
+                                </Link>
+                            }
+                        </li>
                     </ul>
                 </div>
             </div>
