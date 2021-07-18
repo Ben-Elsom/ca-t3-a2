@@ -5,6 +5,7 @@ import './App.css';
 
 import Navbar from './components/navbar/Navbar.js';
 import ItemMenu from './components/ItemMenu.js';
+import ItemForm from './components/ItemForm.js';
 import data1 from './data/data.js';
 
 export const OrderContext = React.createContext();
@@ -115,7 +116,9 @@ function App() {
           {/* Route for editing user */}
           <Route path='/user/' render={() => <h1>This page is for editing a user account</h1>} />
           {/* Route for editing item */}
-          <Route path='/item/:id' render={() => <h1>This page is for editing item</h1>} />
+          <Route path='/item/'>
+            <ItemForm />
+          </Route>
           {/* Route for redirection */}
           <Route><Redirect to='/' /></Route>
         </Switch>
