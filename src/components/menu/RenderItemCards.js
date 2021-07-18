@@ -26,9 +26,9 @@ export default function RenderItemCards(props) {
             <CategoryContainer>
                 {
                     itemList.filter((item) => item.category === category)
-                    .map((item) => (
+                    .map((item, index) => (
                         <ItemCard
-                            key={item.id}
+                            key={index}
                             id={item.id}
                             name={item.name}
                             unitPrice={item.unitPrice}

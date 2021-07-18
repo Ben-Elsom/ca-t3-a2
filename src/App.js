@@ -4,8 +4,10 @@ import './App.css';
 
 
 import Navbar from './components/navbar/Navbar.js';
+import HomePage from './pages/HomePage.js'
 import ItemMenu from './components/ItemMenu.js';
-import ItemForm from './components/ItemForm.js';
+import ItemForm from './pages/ItemForm.js';
+import UserForm from './pages/UserForm.js';
 import data1 from './data/data.js';
 
 export const OrderContext = React.createContext();
@@ -98,14 +100,13 @@ function App() {
       {/* {console.log(order)} */}
       <BrowserRouter className='App'>
         <Navbar user={user}/>
-        <Switch>
+        <Switch className='main-content'>
+
           {/* Route for home page */}
           <Route exact path='/'>
-            <h1>Home Page</h1>
-            <Link to='/order'>ORDER NOW</Link>
-            <Link to='/user'>User</Link>
-            <Link to='/item'>Item (not working)</Link>
+            <HomePage />
           </Route>
+          
           {/* Route for ordering */}
           <Route exact path='/order'>
             <ItemMenu
@@ -113,12 +114,19 @@ function App() {
               categories={categories}
             />
           </Route>
+          
           {/* Route for editing user */}
-          <Route path='/user/' render={() => <h1>This page is for editing a user account</h1>} />
+          <Route exact path='/user'>
+            <UserForm
+              edit={true}
+            />
+          
+          </Route>
           {/* Route for editing item */}
-          <Route path='/item/'>
+          <Route path='/item'>
             <ItemForm />
           </Route>
+          
           {/* Route for redirection */}
           <Route><Redirect to='/' /></Route>
         </Switch>

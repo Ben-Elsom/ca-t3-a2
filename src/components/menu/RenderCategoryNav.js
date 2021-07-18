@@ -12,7 +12,7 @@ const Category = styled.li`
 `;
 
 export default function RenderCategoryNav(props){
-    return props.categories.map((category) => (
-        <Category key={category}><a href={`#${category}`}>{category}</a></Category>
+    return props.categories.map((category, index) => (
+        <Category key={index}><a href={`#${category}`}>{category}</a></Category>
     ))
 }

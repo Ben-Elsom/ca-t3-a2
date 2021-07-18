@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextInput, PasswordInput, EmailInput, FormBtn } from './form/InputField';
+import { TextInput, PasswordInput, EmailInput, FormBtn } from '../components/formComponents.js';
 
 const Main = styled.main`
     width: 100vw;
@@ -15,7 +15,7 @@ const Header = styled.h2`
 
 const Form = styled.form`
     width: 100%;
-    max-width: 280px;
+    max-width: 250px;
     display: flex;
     flex-direction: column;
     margin: auto;

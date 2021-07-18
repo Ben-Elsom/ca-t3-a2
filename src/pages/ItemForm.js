@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextInput, TextAreaInput, NumberInput, CheckBoxInput, FormBtn, SelectInput } from './form/InputField';
+import { TextInput, TextAreaInput, NumberInput, CheckBoxInput, FormBtn, SelectInput } from '../components/formComponents.js';
 
 const Main = styled.main`
     width: 100vw;
@@ -22,7 +22,7 @@ const Form = styled.form`
 `;
 
 
-export default function ItemForm(props) {
+export default function ItemForm() {
     return (
         <Main>
             <Header>Edit Item</Header>
