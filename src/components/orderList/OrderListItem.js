@@ -1,12 +1,10 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import QtyButton from '../buttons/QtyButton.js';
 
-import {OrderContext, ACTIONS} from '../../App.js';
-
 const Container = styled.div`
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     margin: 0 20px 10px 20px;
     display: flex;
     flex-direction: row;
@@ -21,17 +19,18 @@ const ItemName = styled.p`
 
 const QtyContainer = styled.div`
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 45%;
 `;
 
 
 const Price = styled.p`
     margin: 0 0 0 10px;
+    wrap: nowrap;
 `;
 
 export default function OrderListItem(props) {
-    const orderContext = useContext(OrderContext);
 
     return (
         <Container >
@@ -39,37 +38,11 @@ export default function OrderListItem(props) {
             <QtyContainer>
                 <QtyButton 
                     qty={props.qty}
-                    add={() => console.log("add by 1")}
-                    subtract={() => console.log("subtract by 1")}
-                    // subtract={() => orderContext.orderDispatch({
-                    //     type: ACTIONS.REMOVE_ITEM_FROM_ORDER,
-                    //     value: props.index
-                    // })}
-                    minimum={-1}
+                    add={props.addHandler}
+                    subtract={props.subtractHandler}
                 />
-                <Price>AUD $ {props.unitPrice * props.qty}</Price>
+                <Price>$ {(props.unitPrice * props.qty).toFixed(2)}</Price>
             </QtyContainer>
         </Container>
     )
 }
-
-    // return orderContext.orderState.orderedItems.map((item) =>
-    //     // console.log(item.name)
-    //     <Container key={item.itemId}>
-    //         {/* <ItemName>{item.name}</ItemName> */}
-    //         <QtyContainer>
-    //             <QtyButton 
-    //                 qty={item.qty}
-    //                 add={
-    //                     orderContext.orderDispatch({
-    //                         type: ACTIONS.ADD_ITEM_BY_1,
-    //                         value: addItem(item.id)
-    //                     })
-    //                 }
-    //                 // subtract={() => setQty(qty - 1)}
-    //                 minimum={0}
-    //             />
-    //             <Price>AUD $ {item.unitPrice * item.qty}</Price>
-    //         </QtyContainer>
-    //     </Container>
-    // )

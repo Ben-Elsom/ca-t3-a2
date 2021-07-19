@@ -1,5 +1,5 @@
 import React, {useReducer, useState} from 'react';
-import {BrowserRouter, Switch, Route, Redirect, Link} from 'react-router-dom'
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import './App.css';
 
 
@@ -21,7 +21,7 @@ export const OrderContext = React.createContext();
     lastName: "Smith",
     membershipPoints: 15
   }  
-  ///////////////// useReducer setup //////////////////
+    ///////////////// useReducer setup //////////////////
   const initialOrder = {
     orderId: 123,
     status: false,
@@ -31,7 +31,7 @@ export const OrderContext = React.createContext();
     userId: 99999,
     subCost: 0.00,
     serviceCharge: 0.3,
-    orderedItems: []
+    orderItems: []
   }
   
   export const ACTIONS = {
@@ -43,7 +43,9 @@ export const OrderContext = React.createContext();
       ADD_ITEM_BY_1: 'ADD_ITEM_BY_1',
       SUBTRACT_ITEM_BY_1: 'SUBTRACT_ITEM_BY_1',
       ADD_ITEM_TO_ORDER: 'ADD_ITEM_TO_ORDER',
-      REMOVE_ITEM_FROM_ORDER: 'REMOVE_ITEM_FROM_ORDER'
+      REMOVE_ITEM_FROM_ORDER: 'REMOVE_ITEM_FROM_ORDER',
+      ADD: 'ADD',
+      SUBTRACT: 'SUBTRACT'
   }
 
   const reducer = (order, action) => {
@@ -59,17 +61,24 @@ export const OrderContext = React.createContext();
               return {...order, instruction: action.value};
           case ACTIONS.UPDATE_SUB_COST:
               return order;
+
+
           case ACTIONS.ADD_ITEM_BY_1:
-              return {...order, orderedItems: action.value}; //NOT YET
+              let newList = order.orderItems.slice()
+              newList[action.value].qty ++
+              return {...order, orderItems: newList}
+
           case ACTIONS.SUBTRACT_ITEM_BY_1:
-              return {...order, orderItems: action.value}; //NOT YET
+            let newOrderedItems2 = order.orderItems.slice()
+            newOrderedItems2[action.value].qty = newOrderedItems2[action.value].qty - 1
+            return {...order, orderItems: newOrderedItems2}
 
           // Would be great to create an orderedItem object later
           case ACTIONS.ADD_ITEM_TO_ORDER:
               return {
                 ...order,
-                orderedItems: [
-                  ...order.orderedItems,
+                orderItems: [
+                  ...order.orderItems,
                   {
                     itemId: action.value.id,
                     name: action.value.name,
@@ -79,11 +88,46 @@ export const OrderContext = React.createContext();
                 ]
               }
           case ACTIONS.REMOVE_ITEM_FROM_ORDER:
-              return console.log(action.value) //NOT YET
-              // {
-              //   ...order,
-              //   orderItems: order.orderedItems.filter((item, index) => index != action.value)
-              // }
+              return {
+                ...order,
+                orderItems: order.orderItems.filter((item, index) => index !== action.value)
+              }
+
+          case ACTIONS.ADD:
+              let index = order.orderItems.findIndex(item => item.itemId === action.value)
+              if (index === -1){
+                let item = itemList.find( o => o.id === action.value)
+                return {
+                  ...order,
+                  orderItems: [
+                    ...order.orderItems,
+                    {
+                      itemId: item.id,
+                      name: item.name,
+                      qty: 1,
+                      unitPrice: item.unitPrice
+                    }
+                  ]
+                }
+              } else{
+                let newList1 = order.orderItems.slice()
+                newList1[index].qty ++
+                return {...order, orderItems: newList1}
+              }
+
+          case ACTIONS.SUBTRACT:
+              // let itemIndex = order.orderItem.findIndex(item => item.itemId === action.value)
+              console.log(action.value)
+              if (order.orderItem[action.value].qty <= 1){
+                return {
+                  ...order,
+                  orderItems: order.orderItems.filter((item, index) => index !== action.value)
+                }
+              } else {
+                let newList = order.orderItems.slice()
+                newList[action.value].qty --
+                return {...order, orderItems: newList}
+              }
           default:
               return order;
       }

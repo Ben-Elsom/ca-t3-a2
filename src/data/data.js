@@ -4,7 +4,7 @@ const items = [
   {
     id: 1001,
     name: 'Shoyu Ramen',
-    unitPrice: '13.00',
+    unitPrice: (13).toFixed(2),
     thumbnail: ramenThumbnail,
     description: "Shoyu is very yummy",
     category: "Main"

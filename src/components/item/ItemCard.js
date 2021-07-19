@@ -65,13 +65,17 @@ export default function ItemCard(props) {
             <Button 
                 content="ADD +"
                 onClick={() => orderContext.orderDispatch({
-                    type: ACTIONS.ADD_ITEM_TO_ORDER,
-                    value: {
-                        id: props.id,
-                        name: props.name,
-                        unitPrice: props.unitPrice
-                    }
+                    type: ACTIONS.ADD,
+                    value: props.id
                 })}
+                // onClick={() => orderContext.orderDispatch({
+                //     type: ACTIONS.ADD_ITEM_TO_ORDER,
+                //     value: {
+                //         id: props.id,
+                //         name: props.name,
+                //         unitPrice: props.unitPrice
+                //     }
+                // })}
             />
         </ItemCardContainer>
     )

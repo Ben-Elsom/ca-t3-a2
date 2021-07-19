@@ -19,7 +19,7 @@ const Btn = styled.button`
 `;
 
 const Qty = styled.p`
-    width: 50px;
+    width: 40px;
     border: none;
     text-align: center;
     height: 25px;
