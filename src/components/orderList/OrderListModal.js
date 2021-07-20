@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import './OrderListModal.css';
-import {OrderContext, ACTIONS} from '../../App.js';
+import {OrderContext, ACTIONS} from '../../useReducer/orderReducer.js';
 
 import Modal from 'react-modal';
 import PickupTime from './PickupTime.js';

@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import Button from '../buttons/Button';
 import styled from 'styled-components';
 import ItemModal from './ItemModal.js';
-import {OrderContext, ACTIONS} from '../../App.js';
+import {OrderContext, ACTIONS} from '../../useReducer/orderReducer.js';
 
 
 const ItemCardContainer = styled.div`

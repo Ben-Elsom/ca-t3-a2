@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import styled from 'styled-components';
-import {OrderContext} from '../../App.js';
+import {OrderContext} from '../../useReducer/orderReducer.js';
 import SelectTime from './SelectTime.js';
 import {format} from 'date-fns';
 

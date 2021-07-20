@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import styled from 'styled-components';
-import {OrderContext, ACTIONS} from '../../App.js';
+import {OrderContext, ACTIONS} from '../../useReducer/orderReducer.js';
 
 const Container = styled.div`
     margin: 0px 20px 10px 20px;
