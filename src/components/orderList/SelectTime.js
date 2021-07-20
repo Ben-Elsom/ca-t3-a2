@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import styled from 'styled-components';
-import {OrderContext, ACTIONS} from '../../useReducer/orderReducer.js';
+import { OrderContext } from '../../App';
+import { ACTIONS } from '../../useReducer/orderReducer.js';
 import { format, addMinutes, addDays} from 'date-fns';
 
 import {MdDone} from 'react-icons/md';

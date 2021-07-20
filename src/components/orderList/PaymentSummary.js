@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import styled from 'styled-components';
-import {OrderContext} from '../../useReducer/orderReducer.js';
+import {OrderContext} from '../../App.js';
 
 import {AiFillCaretDown, AiFillCaretUp} from 'react-icons/ai';
 

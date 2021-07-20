@@ -1,6 +1,8 @@
 import React, {useContext} from 'react';
 import './OrderListModal.css';
-import {OrderContext, ACTIONS} from '../../useReducer/orderReducer.js';
+import { OrderContext } from '../../App';
+import { ACTIONS } from '../../useReducer/orderReducer.js';
+
 
 import Modal from 'react-modal';
 import PickupTime from './PickupTime.js';
@@ -19,21 +21,20 @@ export default function OrderListModal(props) {
                 unitPrice={item.unitPrice}
                 qty={item.qty}
                 addHandler={() => orderContext.orderDispatch({
-                        type: ACTIONS.ADD,
-                        value: item.id
+                        type: ACTIONS.ADD_ITEM_BY_N,
+                        value: {
+                            index: index,
+                            qty: 1
+                        }
                     })}
                 subtractHandler={() => orderContext.orderDispatch({
-                    type: ACTIONS.SUBTRACT,
+                    type: ACTIONS.SUBTRACT_ITEM_BY_1,
                     value: index
                 })}
-                // subtractHandler={() => orderContext.orderDispatch({
-                //     type: ACTIONS.SUBTRACT_ITEM_BY_1,
-                //     value: index
-                // })}
-                // removeHandler={() => orderContext.orderDispatch({
-                //     type: ACTIONS.REMOVE_ITEM_FROM_ORDER,
-                //     value: index
-                // })}
+                removeHandler={() => orderContext.orderDispatch({
+                    type: ACTIONS.REMOVE_ITEM_FROM_ORDER,
+                    value: index
+                })}
             />
     )
 

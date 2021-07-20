@@ -12,7 +12,7 @@ import LoginForm from './pages/LoginForm.js';
 
 // Importing reducers
 import { initialOrder, reducer } from './useReducer/orderReducer.js';
-import {User} from './useReducer/userReducer.js';
+import { User } from './useReducer/userReducer.js';
 import { categories, itemList } from './useReducer/menuReducer';
 
 // Exporting orderContext

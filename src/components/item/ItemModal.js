@@ -1,10 +1,41 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import './ItemModal.css';
 import Modal from 'react-modal';
 import QtyButton from '../buttons/QtyButton.js';
+import { OrderContext } from '../../App';
+import { ACTIONS } from '../../useReducer/orderReducer';
 
 export default function ItemModal(props) {
-    const [qty, setQty] = useState(1)
+    const orderContext = useContext(OrderContext);
+    const [qty, setQty] = useState(1);
+
+    const addAction = (n) =>{
+        props.closeModal()
+        let index = orderContext.orderState.orderItems.findIndex( item =>
+            item.itemId === props.itemId
+        )
+
+        if (index === -1) {
+            return orderContext.orderDispatch({
+                type: ACTIONS.ADD_ITEM_TO_ORDER,
+                value: {
+                    itemId: props.itemId,
+                    name: props.name,
+                    unitPrice: props.unitPrice,
+                    qty: n
+                }
+            })
+        } else {
+            return orderContext.orderDispatch({
+                type: ACTIONS.ADD_ITEM_BY_N,
+                value: {
+                    index: index,
+                    qty: n
+                }
+            })
+        }
+
+    }
 
     return (
         <Modal
@@ -30,8 +61,9 @@ export default function ItemModal(props) {
                 />
                 <button
                     className="item-btn-add"
-                    // missing on click action
-                    onClick={() => console.log("add item to order list")}
+                    onClick={() => {
+                        addAction(qty)
+                    }}
                 >
                     ADD +
                 </button>
