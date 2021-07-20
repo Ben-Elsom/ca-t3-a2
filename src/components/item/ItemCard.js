@@ -2,7 +2,8 @@ import React, {useState, useContext} from 'react';
 import Button from '../buttons/Button';
 import styled from 'styled-components';
 import ItemModal from './ItemModal.js';
-import {OrderContext, ACTIONS} from '../../App.js';
+import { OrderContext } from '../../App';
+import { ACTIONS } from '../../useReducer/orderReducer.js';
 
 
 const ItemCardContainer = styled.div`
@@ -47,11 +48,37 @@ export default function ItemCard(props) {
     const orderContext = useContext(OrderContext);
     const [itemModal, setItemModal] = useState(false);
 
+    const addAction = () =>{
+        let index = orderContext.orderState.orderItems.findIndex( item =>
+            item.itemId === props.itemId    
+        )
+        if (index === -1) {
+            return orderContext.orderDispatch({
+                type: ACTIONS.ADD_ITEM_TO_ORDER,
+                value: {
+                    itemId: props.itemId,
+                    name: props.name,
+                    unitPrice: props.unitPrice,
+                    qty: 1
+                }
+            })
+        } else {
+            return orderContext.orderDispatch({
+                type: ACTIONS.ADD_ITEM_BY_N,
+                value: {
+                    index: index,
+                    qty: 1
+                }
+            })
+        }
+    }
+
     return (
         <ItemCardContainer>
             <ItemModal
                 isOpen={itemModal}
                 closeModal={() => setItemModal(false)}
+                itemId={props.itemId}
                 name={props.name}
                 unitPrice={props.unitPrice}
                 thumbnail={props.thumbnail}
@@ -64,18 +91,7 @@ export default function ItemCard(props) {
             <ItemPrice>AUD $ {props.unitPrice}</ItemPrice>
             <Button 
                 content="ADD +"
-                onClick={() => orderContext.orderDispatch({
-                    type: ACTIONS.ADD,
-                    value: props.id
-                })}
-                // onClick={() => orderContext.orderDispatch({
-                //     type: ACTIONS.ADD_ITEM_TO_ORDER,
-                //     value: {
-                //         id: props.id,
-                //         name: props.name,
-                //         unitPrice: props.unitPrice
-                //     }
-                // })}
+                onClick={() => addAction()}
             />
         </ItemCardContainer>
     )

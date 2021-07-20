@@ -27,11 +27,12 @@ const QtyContainer = styled.div`
 
 const Price = styled.p`
     margin: 0 0 0 10px;
-    wrap: nowrap;
 `;
 
 export default function OrderListItem(props) {
-
+    const subtractAction = () =>{
+        return (props.qty <= 1) ? props.removeHandler : props.subtractHandler
+    }
     return (
         <Container >
             <ItemName>{props.name}</ItemName>
@@ -39,7 +40,7 @@ export default function OrderListItem(props) {
                 <QtyButton 
                     qty={props.qty}
                     add={props.addHandler}
-                    subtract={props.subtractHandler}
+                    subtract={subtractAction()}
                 />
                 <Price>$ {(props.unitPrice * props.qty).toFixed(2)}</Price>
             </QtyContainer>

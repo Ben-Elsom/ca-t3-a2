@@ -29,7 +29,7 @@ export default function RenderItemCards(props) {
                     .map((item, index) => (
                         <ItemCard
                             key={index}
-                            id={item.id}
+                            itemId={item.id}
                             name={item.name}
                             unitPrice={item.unitPrice}
                             description={item.description}
