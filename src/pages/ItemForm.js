@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextInput, TextAreaInput, NumberInput, CheckBoxInput, FormBtn, SelectInput } from '../components/formComponents.js';
+import { TextInput, TextAreaInput, NumberInput, CheckBoxInput, FormBtn, SelectInput, FileUpload } from '../components/formComponents.js';
 
 const Main = styled.main`
     width: 100vw;
@@ -23,22 +23,24 @@ const Form = styled.form`
 `;
 
 
-export default function ItemForm() {
+
+export default function ItemForm(props) {
     return (
         <Main>
-            <Header>Edit Item</Header>
+            <Header>{props.editing ? 'Edit Item' : 'Crete Item'}</Header>
             <Form>
                 <CheckBoxInput
-                    name='publish'
+                    name='published'
                     labelLeft='Hidden'
                     labelRight='Publish'
+                    value={props.item.published}
                 />
 
                 <TextInput
                     label='Item Name :'
                     name='itemName'
                     onChange={() => console.log('itemName')}
-                    defaultValue=''
+                    value={props.item.itemName}
                     placeholder='Please insert item name'
                 />
 
@@ -46,14 +48,16 @@ export default function ItemForm() {
                     label='Unit Price :'
                     name='unitPrice'
                     onChange={() => console.log('unitPrice')}
-                    defaultValue=''
-                    placeholder='Please insert 2 decimal points'
+                    value={props.item.unitPrice}
+                    placeholder='Please insert unit price'
+                    step={0.05}
                 />
                 
                 <SelectInput
                     label='Category :'
                     name='category'
                     onChange={() => console.log('category')}
+                    // This need to be updated later  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     options={[
                         {
                             label: 'Main',
@@ -78,12 +82,17 @@ export default function ItemForm() {
                     name='description'
                     label='Description :'
                     placeholder='Description of the item...'
+                    value={props.item.description}
                 />
-                <br />
-                <FormBtn
-                    value='Submit'
 
+                <FileUpload
+                    label="Upload thumbnail :"
+                    value={props.item.value}
                 />
+
+                <br />
+                
+                <FormBtn value='Submit'/>
 
             </Form>
         </Main>

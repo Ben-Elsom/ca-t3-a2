@@ -90,8 +90,13 @@ const Option = styled.option`
 
 const TextArea = styled.textarea`
     padding: 3px;
+    margin: 0 5px 10px 5px;
     font-size: 0.8rem;
     height: 100px;
+`;
+
+const Upload = styled.input`
+    margin: 0 5px 10px 5px;
 `;
 
 export function TextInput(props){
@@ -155,6 +160,7 @@ export function EmailInput(props){
             <TextField 
                 type='email'
                 name={props.name}
+                defaultValue={props.value}
                 onChange={props.onChange}
                 placeholder={props.placeholder}
                 required
@@ -170,6 +176,7 @@ export function CheckBoxInput(props){
             <CheckBoxField 
                 type='checkbox'
                 name={props.name}
+                defaultValue={props.value}
                 />
             <Label>{props.labelRight}</Label>
         </CenterWrapper>
@@ -213,6 +220,15 @@ export function TextAreaInput(props){
                 defaultValue={props.value}
                 onChange={props.onChange}
             />
+        </Wrapper>
+    )
+}
+
+export function FileUpload(props){
+    return(
+        <Wrapper>
+            <Label>{props.label}</Label>
+            <Upload type="file" />
         </Wrapper>
     )
 }
